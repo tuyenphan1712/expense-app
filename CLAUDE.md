@@ -4,7 +4,7 @@
 A personal expense tracking app — accounts/wallets, categories, transactions, budgets, and analytics/dashboard — with a web admin surface.
 
 ## Tech Stack
-  - Frontend: React + Vite + TypeScript
+  - Web: React + Vite + TypeScript
   - Mobile: Expo + React Native + TypeScript
   - Backend: Spring Boot + Java + Gradle
   - Database: MySQL (+ Redis for refresh tokens / analytics cache)
@@ -33,8 +33,8 @@ A personal expense tracking app — accounts/wallets, categories, transactions, 
 Skills are scoped per app — each lives in that app's own `.claude/skills/`, not in the root `.claude/`. Claude Code auto-picks the scoped version when working inside that app's folder.
 
 ### Project Setup
-- `/init-base [backend|frontend|mobile]` - Setup project architecture & environment (root-level skill, applies to all three apps)
-- `/explain [code|concept|flow|why] [target] [be|fe|mobile]` - Beginner-friendly explanation of code, concepts, data flow, or design decisions, sourced from the docs — not a raw source-code dump (root-level skill)
+- `/init-base [backend|web|mobile]` - Setup project architecture & environment (root-level skill, applies to all three apps)
+- `/explain [code|concept|flow|why] [target] [be|web|mobile]` - Beginner-friendly explanation of code, concepts, data flow, or design decisions, sourced from the docs — not a raw source-code dump (root-level skill)
 
 ### Git
 - `/commit` - Preview + confirm a Conventional Commits message (auto-detects type/scope from the staged diff). Author is always the user's own git identity — never adds AI co-authorship.
@@ -46,8 +46,8 @@ Skills are scoped per app — each lives in that app's own `.claude/skills/`, no
 |---|---|---|
 | `/be-crud [feature]` | Backend | Spring Boot entity, controller, service, repository, DTOs, mapper, exception, Flyway migration |
 | `/be-test [feature]` | Backend | JUnit 5 unit tests, MockMvc controller tests, Testcontainers integration tests |
-| `/fe-crud [feature]` | Frontend | React pages, components, hooks, services, types |
-| `/fe-test [feature]` | Frontend | Vitest + React Testing Library component/hook/page tests |
+| `/web-crud [feature]` | Web | React pages, components, hooks, services, types |
+| `/web-test [feature]` | Web | Vitest + React Testing Library component/hook/page tests |
 | `/mobile-crud [feature]` | Mobile | Expo Router routes, screens, components, hooks, services, types |
 | `/mobile-test [feature]` | Mobile | Jest + React Native Testing Library component/hook/screen tests |
 | `/seed-data [entity] [count]` | Backend | Fake/seed rows via a `@Profile("seed")` Spring runner + `net.datafaker` — `users`, `accounts`, `categories`, `transactions` only, never `budgets` version history or `refresh_tokens` |
@@ -55,10 +55,10 @@ Skills are scoped per app — each lives in that app's own `.claude/skills/`, no
 ### Skill Routing
 
 When user asks to:
-- "tạo feature", "add entity", "generate crud" → ask (or infer from context) which app, then use `/be-crud`, `/fe-crud`, or `/mobile-crud`
-- "viết test", "add tests" → use `/be-test`, `/fe-test`, or `/mobile-test` matching the app of the feature just created/edited
+- "tạo feature", "add entity", "generate crud" → ask (or infer from context) which app, then use `/be-crud`, `/web-crud`, or `/mobile-crud`
+- "viết test", "add tests" → use `/be-test`, `/web-test`, or `/mobile-test` matching the app of the feature just created/edited
 - "init project", "setup structure" → use `/init-base`
-- "fake data", "seed", "tạo dữ liệu mẫu" → use `/seed-data` (backend only — frontend/mobile consume seeded data through the real API, they don't seed the DB directly)
+- "fake data", "seed", "tạo dữ liệu mẫu" → use `/seed-data` (backend only — web/mobile consume seeded data through the real API, they don't seed the DB directly)
 
 ### Important
 - Always read the skill's required docs BEFORE generating code.
@@ -70,7 +70,7 @@ When user asks to:
 
 ## Brainstorming / Planning Doc Location
 When using the `superpowers:brainstorming` or `superpowers:writing-plans` skills, save the spec/plan inside the docs of the app the work belongs to, not at the repo root:
-- Frontend work → `03-web-reactjs/docs/superpowers/specs/` and `03-web-reactjs/docs/superpowers/plans/`
+- Web work → `03-web-reactjs/docs/superpowers/specs/` and `03-web-reactjs/docs/superpowers/plans/`
 - Backend work → `02-backend-java/docs/superpowers/specs/` and `02-backend-java/docs/superpowers/plans/`
 - Mobile work → `04-mobile-expo/docs/superpowers/specs/` and `04-mobile-expo/docs/superpowers/plans/`
 - Work spanning multiple apps (rare) → keep at repo root `docs/superpowers/specs/` / `docs/superpowers/plans/`

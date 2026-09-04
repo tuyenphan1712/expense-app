@@ -2,11 +2,11 @@
 name: init-base
 description: >
   Setup project architecture and environment for an existing project.
-  Creates the feature-based foundation for backend, frontend, or mobile apps,
+  Creates the feature-based foundation for backend, web, or mobile apps,
   installs missing dependencies, and configures base shared setup.
-  Use when user says "init backend", "init frontend", "init mobile",
+  Use when user says "init backend", "init web", "init mobile",
   "setup structure", "scaffold project", or "setup environment".
-argument-hint: "[frontend|backend|mobile]"
+argument-hint: "[backend|web|mobile]"
 allowed-tools:
   - Read
   - Write
@@ -74,19 +74,19 @@ Apply these rules to every project, regardless of language or framework:
   `VITE_` prefix.
 - Expo loads public variables through its environment support; variables used
   by the client must use the `EXPO_PUBLIC_` prefix.
-- Do not treat frontend/mobile `.env` values as secrets: anything bundled into
+- Do not treat web/mobile `.env` values as secrets: anything bundled into
   a client application can be inspected by users.
 - Do not add another dotenv library unless the project has a specific server-
   side need.
 
 ## Pre-flight Checks
 
-1. **Argument provided?** Must be `frontend`, `backend`, or `mobile`
+1. **Argument provided?** Must be `backend`, `web`, or `mobile`
 2. **Target directory exists?**
    - Backend: `02-backend-java/`
-   - Frontend: `03-web-reactjs/`
+   - Web: `03-web-reactjs/`
    - Mobile: `04-mobile-expo/`
-3. **Project already initialized?** Check for `package.json` for frontend/mobile or build files for backend.
+3. **Project already initialized?** Check for `package.json` for web/mobile or build files for backend.
    - If not exists → Error: "Project not found. Create project first."
 
 ---
@@ -108,8 +108,8 @@ Apply these rules to every project, regardless of language or framework:
 2. Scan current project to see what already exists
 3. **Install missing dependencies** (see below)
 4. **Create folder structure** as defined in `BE-ARCHITECTURE.md`:
-   - Create empty feature folders under `src/main/java/com/tuyen/personalvault/features/`
-   - Create shared folders under `src/main/java/com/tuyen/personalvault/shared/`
+   - Create empty feature folders under `src/main/java/com/tuyenphan/expenseapp/feature/`
+   - Create shared folders under `src/main/java/com/tuyenphan/expenseapp/shared/`
    - Create config folders as needed in the project
 5. **Setup config files**:
    - `.env.example` or profile-specific `application-example.properties`
@@ -153,7 +153,7 @@ Check project files first, then install only what's missing.
 
 ---
 
-## Task: Frontend Scaffolding
+## Task: Web Scaffolding
 
 ### Required Reading (READ FIRST)
 
@@ -194,7 +194,7 @@ Check project files first, then install only what's missing.
 
 Check `package.json` first and install only what is missing.
 
-**Current frontend baseline in this workspace:**
+**Current web baseline in this workspace:**
 - React 19
 - Vite
 - TypeScript
@@ -293,7 +293,7 @@ npm install react-hook-form zod @hookform/resolvers expo-secure-store
 After completion, provide:
 
 ```
-✅ {Backend|Frontend|Mobile} architecture setup complete!
+✅ {Backend|Web|Mobile} architecture setup complete!
 
 📁 Location: ./{02-backend-java|03-web-reactjs|04-mobile-expo}/
 
@@ -335,6 +335,6 @@ After completion, provide:
 
 | Error | Action |
 |-------|--------|
-| Missing argument | Ask: "Which project? `/init-base backend`, `/init-base frontend`, or `/init-base mobile`" |
+| Missing argument | Ask: "Which project? `/init-base backend`, `/init-base web`, or `/init-base mobile`" |
 | Doc file not found | List missing docs and ask user to create them first |
 | Project not found | Error: "No matching project directory or config found. Is this the correct workspace?" |

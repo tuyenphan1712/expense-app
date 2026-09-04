@@ -44,17 +44,17 @@
 
 ## Scope Detection
 
-`credentials`, `documents`, `auth`, `profile`, and `admin` all exist as **separate features in all three apps** — a bare `(credentials)` scope would be ambiguous. Prefix the scope with the app:
+`auth`, `account`, `category`, `transaction`, `budget`, `analytics`, and `admin` all exist as **separate features in backend + mobile** (web admin has its own feature set: `users`, `categories`, `reports`, `settings`, `audit`, plus `auth`/`admin`) — a bare `(auth)` scope would be ambiguous. Prefix the scope with the app:
 
 | File path | Scope |
 |-----------|-------|
-| `backend-java-personal-vault/.../features/{name}/*` | `be-{name}` (e.g. `be-credentials`, `be-auth`) |
-| `frontend-react-personal-vault/src/features/{name}/*` | `fe-{name}` (e.g. `fe-documents`) |
-| `mobile-expo-personal-vault/src/features/{name}/*` | `mobile-{name}` (e.g. `mobile-credentials`) |
-| `backend-java-personal-vault/src/main/java/.../shared/*` or `.../config/*` | `be-shared` |
-| `frontend-react-personal-vault/src/shared/*` or `src/routes/*` | `fe-shared` |
-| `mobile-expo-personal-vault/src/shared/*` or `app/*` | `mobile-shared` |
-| `backend-java-personal-vault/src/main/resources/db/migration/*` | `be-{name}` of the feature the migration belongs to, not a generic `db` scope |
+| `02-backend-java/.../feature/{name}/*` | `be-{name}` (e.g. `be-transaction`, `be-auth`) |
+| `03-web-reactjs/src/features/{name}/*` | `web-{name}` (e.g. `web-reports`) |
+| `04-mobile-expo/src/features/{name}/*` | `mobile-{name}` (e.g. `mobile-transaction`) |
+| `02-backend-java/src/main/java/.../shared/*` or `.../config/*` | `be-shared` |
+| `03-web-reactjs/src/shared/*` or `src/app/*` | `web-shared` |
+| `04-mobile-expo/src/shared/*` or `app/*` | `mobile-shared` |
+| `02-backend-java/src/main/resources/db/migration/*` | `be-{name}` of the feature the migration belongs to, not a generic `db` scope |
 | `01-share-docs/API_SPEC.md`, `01-share-docs/DATABASE.md` | `docs` (omit app prefix — these are shared across all three) |
 | Any `.claude/skills/**` | `skills` |
 | Touches more than one app in one commit | Prefer splitting into separate commits (see Rules); if genuinely one atomic change, omit scope rather than guess |
@@ -82,41 +82,40 @@ A Flyway migration (`V{n}__....sql`) almost never lands alone — it belongs to 
 
 ### Simple feature
 ```
-feat(be-auth): add mobile refresh token rotation
+feat(be-transaction): add duplicate transaction endpoint
 ```
 
 ### Feature with body
 ```
-feat(be-auth): add mobile refresh token rotation
+feat(be-auth): add refresh token rotation
 
-- Accept refreshToken in the request body for clientType=mobile
-- Revoke the old refresh_tokens row and issue a new one on each use
-- Reject with AUTH_003 if the token is invalid, expired, or revoked
+- Accept refreshToken in the request body
+- Revoke the old Redis-backed refresh token and issue a new one on each use
+- Reject with AUTH_1004 if the token is invalid, expired, or revoked
 ```
 
 ### Bug fix
 ```
-fix(fe-credentials): reject empty password before encrypting
+fix(web-reports): show budget overspend badge for the correct category
 
-Empty string was passing client-side validation and getting
-encrypted/submitted instead of showing a form error.
+Category id from the previous month's response was leaking into this
+month's donut chart after a fast month switch.
 ```
 
 ### Migration + feature together
 ```
-feat(be-documents): add mime_type and file_size columns
+feat(be-budget): add version column for optimistic locking
 
-- Add V4__add_document_metadata_columns.sql
-- Validate and persist mimeType/fileSize on upload
-- Set Content-Type from stored mimeType on download
+- Add V5__add_budgets_version_column.sql
+- Send back the current version on PATCH, reject with BUDGET_1003 on mismatch
 ```
 
 ### Breaking change
 ```
-feat(be-credentials)!: require encryptedPassword as base64
+feat(be-transaction)!: require client-generated id on create
 
-BREAKING CHANGE: the API no longer accepts a raw string for
-encryptedPassword — it must be base64-encoded ciphertext+IV.
+BREAKING CHANGE: POST /transactions no longer accepts a server-generated
+id — the client must send a UUID, required for offline sync idempotency.
 ```
 
 ### Docs-only, shared across apps

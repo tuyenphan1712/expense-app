@@ -51,14 +51,14 @@ This is a personal project — every commit must be authored **solely as the use
    ```
    📝 COMMIT PREVIEW
 
-   feat(be-credentials): add ownership check on update/delete
+   feat(be-transaction): add ownership check on update/delete
 
    - Scope repository queries by authenticated user id
-   - Return 404 (not 403) when a credential belongs to another user
+   - Return 404 (not 403) when a transaction belongs to another user
 
    Staged files (2):
-     M backend-java-personal-vault/src/main/java/com/tuyen/personalvault/features/credentials/service/CredentialService.java
-     M backend-java-personal-vault/src/main/java/com/tuyen/personalvault/features/credentials/repository/CredentialRepository.java
+     M 02-backend-java/src/main/java/com/tuyenphan/expenseapp/feature/transaction/TransactionService.java
+     M 02-backend-java/src/main/java/com/tuyenphan/expenseapp/feature/transaction/TransactionRepository.java
 
    Commit? (yes/no/edit)
    ```
@@ -83,7 +83,7 @@ git commit -m "fix: typo in readme"
 ## Rules
 
 - **Staged only**: Never auto `git add`
-- **Scope from path**: prefixed with the app, since `credentials`/`documents`/`auth` exist as separate features in all 3 apps — see `./references/conventions.md` (`be-credentials`, `fe-credentials`, `mobile-credentials`, etc.)
+- **Scope from path**: prefixed with the app, since `auth`/`transaction`/`budget`/etc. exist as separate features per app — see `./references/conventions.md` (`be-transaction`, `web-reports`, `mobile-transaction`, etc.)
 - **Lowercase**: Type and scope always lowercase
 - **No period**: Don't end subject with `.`
 - **Imperative**: "add" not "added"
