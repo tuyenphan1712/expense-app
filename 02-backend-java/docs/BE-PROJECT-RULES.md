@@ -1,7 +1,7 @@
 # Backend Project Rules — Expense App
 
 > Feature-based backend rules for the Expense App.
-> Product decisions: `IDEA.md`. Schema & JPA conventions: `docs/DATABASE.md`. Context base: `docs/master-prompt.md`.
+> Product decisions: `IDEA.md`. Schema & JPA conventions: `docs/DATABASE.md`.
 
 ## Tech Stack
 - Language: Java 21
@@ -54,7 +54,7 @@ com.tuyenphan.expenseapp/
 | Constants / enums | UPPER_SNAKE_CASE | `MAX_NOTE_LENGTH` / `EXPENSE`, `CREDIT_CARD` |
 | Migrations | `V{n}__{description}.sql` | `V3__create_transactions.sql` |
 
-DB columns are `snake_case` (`transaction_date`) → DTO fields mirror as `camelCase` (`transactionDate`). Keep API field names identical to DB columns (see `docs/master-prompt.md` consistency rules).
+DB columns are `snake_case` (`transaction_date`) → DTO fields mirror as `camelCase` (`transactionDate`). Keep API field names identical to DB columns.
 
 ## 3. Feature Rules
 - Feature must be self-contained: owns its entities, repositories, services, DTOs.

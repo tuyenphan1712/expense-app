@@ -1,7 +1,7 @@
 # Mobile App Project Rules — Expense App
 
 > Feature-based rules for the Mobile app (React Native + Expo + TypeScript) — **primary product**.
-> References: `docs/master-prompt.md` · `docs/API_SPEC.md` · `IDEA.md` §15–16, §24.6 (offline).
+> References: `docs/API_SPEC.md` · `IDEA.md` §15–16, §24.6 (offline).
 
 ## Tech Stack
 - Framework: React Native (Expo SDK) + TypeScript (strict)
