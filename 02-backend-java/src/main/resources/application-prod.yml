@@ -1,0 +1,8 @@
+logging:
+  level:
+    root: WARN
+    com.tuyenphan.expenseapp: INFO
+
+springdoc:
+  swagger-ui:
+    enabled: false

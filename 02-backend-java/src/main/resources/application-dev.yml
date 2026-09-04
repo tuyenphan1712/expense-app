@@ -1,0 +1,9 @@
+logging:
+  level:
+    root: INFO
+    com.tuyenphan.expenseapp: DEBUG
+    org.hibernate.SQL: DEBUG
+
+springdoc:
+  swagger-ui:
+    enabled: true
