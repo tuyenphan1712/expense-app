@@ -83,9 +83,9 @@ Apply these rules to every project, regardless of language or framework:
 
 1. **Argument provided?** Must be `frontend`, `backend`, or `mobile`
 2. **Target directory exists?**
-   - Backend: `backend-java-personal-vault/`
-   - Frontend: `frontend-react-personal-vault/`
-   - Mobile: `mobile-expo-personal-vault/`
+   - Backend: `02-backend-java/`
+   - Frontend: `03-web-reactjs/`
+   - Mobile: `04-mobile-expo/`
 3. **Project already initialized?** Check for `package.json` for frontend/mobile or build files for backend.
    - If not exists → Error: "Project not found. Create project first."
 
@@ -99,8 +99,8 @@ Apply these rules to every project, regardless of language or framework:
 |-----|---------|
 | `01-share-docs/DATABASE.md` | Database schema, naming conventions, entity design |
 | `01-share-docs/API_SPEC.md` | API endpoints, request/response contract |
-| `backend-java-personal-vault/docs/BE-PROJECT-RULES.md` | Coding conventions, patterns, anti-patterns |
-| `backend-java-personal-vault/docs/BE-ARCHITECTURE.md` | Folder structure and feature anatomy |
+| `02-backend-java/docs/BE-PROJECT-RULES.md` | Coding conventions, patterns, anti-patterns |
+| `02-backend-java/docs/BE-ARCHITECTURE.md` | Folder structure and feature anatomy |
 
 ### Workflow
 
@@ -160,15 +160,15 @@ Check project files first, then install only what's missing.
 | Doc | Purpose |
 |-----|---------|
 | `01-share-docs/API_SPEC.md` | API endpoints to consume |
-| `frontend-react-personal-vault/docs/FE-PROJECT-RULES.md` | Coding conventions, state management rules |
-| `frontend-react-personal-vault/docs/FE-ARCHITECTURE.md` | Folder structure, component organization |
+| `03-web-reactjs/docs/WEB-PROJECT-RULES.md` | Coding conventions, state management rules |
+| `03-web-reactjs/docs/WEB-ARCHITECTURE.md` | Folder structure, component organization |
 
 ### Workflow
 
 1. Read all docs above to understand project conventions
 2. Scan current project to see what already exists
 3. **Install missing dependencies** (see below)
-4. **Create folder structure** as defined in `FE-ARCHITECTURE.md`:
+4. **Create folder structure** as defined in `WEB-ARCHITECTURE.md`:
    - Create empty feature folders under `src/features/`
    - Create shared folders under `src/shared/`, including `src/shared/layouts/`
    - Create routes and config folders if absent
@@ -216,7 +216,7 @@ Configure Tailwind according to the installed version. Do not force a version-sp
 
 ### Validation
 
-- [ ] Folder structure matches `FE-ARCHITECTURE.md`
+- [ ] Folder structure matches `WEB-ARCHITECTURE.md`
 - [ ] All required dependencies installed
 - [ ] `.env.example` has API base URL if needed
 - [ ] Axios instance configured with interceptors
@@ -235,8 +235,8 @@ Configure Tailwind according to the installed version. Do not force a version-sp
 |-----|---------|
 | `01-share-docs/API_SPEC.md` | API contract and mobile auth expectations |
 | `01-share-docs/DATABASE.md` | Schema understanding for mobile data modeling |
-| `mobile-expo-personal-vault/docs/MOBILE-PROJECT-RULES.md` | Conventions, patterns, anti-patterns |
-| `mobile-expo-personal-vault/docs/MOBILE-ARCHITECTURE.md` | Folder structure, navigation, app architecture |
+| `04-mobile-expo/docs/MOBILE-PROJECT-RULES.md` | Conventions, patterns, anti-patterns |
+| `04-mobile-expo/docs/MOBILE-ARCHITECTURE.md` | Folder structure, navigation, app architecture |
 
 ### Workflow
 
@@ -295,7 +295,7 @@ After completion, provide:
 ```
 ✅ {Backend|Frontend|Mobile} architecture setup complete!
 
-📁 Location: ./{backend-java-personal-vault|frontend-react-personal-vault|mobile-expo-personal-vault}/
+📁 Location: ./{02-backend-java|03-web-reactjs|04-mobile-expo}/
 
 📦 Dependencies installed:
 - [list newly installed packages]
