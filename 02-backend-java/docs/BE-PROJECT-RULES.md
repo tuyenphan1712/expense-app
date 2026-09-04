@@ -4,8 +4,8 @@
 > Product decisions: `IDEA.md`. Schema & JPA conventions: `docs/DATABASE.md`. Context base: `docs/master-prompt.md`.
 
 ## Tech Stack
-- Language: Java 17
-- Framework: Spring Boot 3 (Spring MVC, Spring Security)
+- Language: Java 21
+- Framework: Spring Boot 4.1.1 (Spring MVC, Spring Security)
 - ORM: Spring Data JPA (Hibernate 6)
 - Migration: Flyway
 - Cache: Redis 7 (refresh tokens, analytics cache — outside relational schema)
@@ -13,7 +13,7 @@
 ## 1. Feature Structure
 
 ```
-com.expenseapp/
+com.tuyenphan.expenseapp/
 ├── feature/                            ← one package per feature
 │   ├── auth/                           (register, login, refresh, profile)
 │   │   ├── AuthController.java
@@ -34,7 +34,7 @@ com.expenseapp/
 │   ├── security/   JwtService · JwtAuthFilter · CurrentUser
 │   ├── common/     ApiResponse · GlobalExceptionHandler · PageResult
 │   └── util/       MoneyUtils · DateUtils
-└── ExpenseAppApplication.java
+└── ExpenseappApplication.java
 ```
 
 - Every feature owns its `controller`, `service`, `repository`, `dto`, `entity`.
@@ -45,7 +45,7 @@ com.expenseapp/
 
 | Item | Convention | Example |
 |---|---|---|
-| Feature package | lowerCamel, under `feature.` | `com.expenseapp.feature.transaction` |
+| Feature package | lowerCamel, under `feature.` | `com.tuyenphan.expenseapp.feature.transaction` |
 | Classes | PascalCase | `TransactionService` |
 | Controller / Service / Repository | `<X>Controller` / `<X>Service` / `<X>Repository` | `TransactionRepository` |
 | Entity | singular PascalCase (maps 1:1 to table) | `Transaction` ↔ `transactions` |
@@ -58,12 +58,12 @@ DB columns are `snake_case` (`transaction_date`) → DTO fields mirror as `camel
 
 ## 3. Feature Rules
 - Feature must be self-contained: owns its entities, repositories, services, DTOs.
-- No direct imports between features — never `import com.expenseapp.feature.budget.*` inside `transaction`.
+- No direct imports between features — never `import com.tuyenphan.expenseapp.feature.budget.*` inside `transaction`.
 - Cross-feature communication only via:
-  - Shared code in `com.expenseapp.shared` (e.g. `common.ApiResponse`)
+  - Shared code in `com.tuyenphan.expenseapp.shared` (e.g. `common.ApiResponse`)
   - A feature's **public Service interface** (import the interface, never its internals)
   - Events — `ApplicationEventPublisher` for decoupled flows (e.g. `TransactionCreatedEvent`/`TransactionUpdatedEvent`/`TransactionDeletedEvent` → budget/analytics recompute + `AccountBalanceUpdateListener`)
-- Shared code location: `com.expenseapp.shared` — add here only when 2+ features use it.
+- Shared code location: `com.tuyenphan.expenseapp.shared` — add here only when 2+ features use it.
 
 ## 4. Code Patterns (MUST follow)
 

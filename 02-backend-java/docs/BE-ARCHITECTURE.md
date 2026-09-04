@@ -12,11 +12,11 @@ flowchart TB
         W[Web Admin — React]
     end
 
-    subgraph BE["Backend — Spring Boot 3 (Monolith)"]
+    subgraph BE["Backend — Spring Boot 4.1.1 (Monolith)"]
         direction TB
         API["Spring MVC · /api/v1"]
         SEC["Spring Security · JWT filter"]
-        subgraph FEAT["com.expenseapp.feature"]
+        subgraph FEAT["com.tuyenphan.expenseapp.feature"]
             F_AUTH[auth]
             F_ACC[account]
             F_CAT[category]
@@ -50,7 +50,7 @@ flowchart TB
 
 ```
 src/main/java/com/expenseapp/
-├── ExpenseAppApplication.java
+├── ExpenseappApplication.java
 ├── shared/                          ← cross-cutting, used by 2+ features
 │   ├── config/      SecurityConfig · RedisConfig · OpenApiConfig
 │   ├── security/    JwtService · JwtAuthFilter · CurrentUser
@@ -113,7 +113,7 @@ Request → [JwtAuthFilter] → Controller → Service → Repository → MySQL
 | Events (`ApplicationEventPublisher`) | `transaction` publishes `TransactionCreatedEvent`/`TransactionUpdatedEvent`/`TransactionDeletedEvent` → `budget`/`analytics` listeners + `AccountBalanceUpdateListener` (updates `accounts.balance` in the same DB transaction) |
 | DI via public service interfaces | `analytics` calls `TransactionService` (interface) by `userId` — never its internals |
 
-**Forbidden:** direct internal imports — `import com.expenseapp.feature.budget.BudgetServiceImpl;`
+**Forbidden:** direct internal imports — `import com.tuyenphan.expenseapp.feature.budget.BudgetServiceImpl;`
 
 `admin` is a thin orchestration feature: it owns only its controllers/DTOs and calls `auth` (users), `category`, and `transaction` services via their **public Service interfaces only** — never their internals.
 
@@ -138,7 +138,7 @@ Rule: an item goes into `shared/` **only when 2+ features use it** — otherwise
 ## Format
 - Mermaid diagrams + folder structure with comments. Max 200 lines.
 
-## Tech-Specific Additions (Spring Boot 3 / JPA)
+## Tech-Specific Additions (Spring Boot 4 / JPA)
 
 ### Modules (dependencies)
 - `spring-boot-starter-web` · `-data-jpa` · `-security` · `-validation` · `-data-redis`
