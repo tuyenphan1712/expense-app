@@ -1,7 +1,7 @@
 # Backend Architecture — Expense App
 
 > Feature-based Spring Boot architecture.
-> References: `docs/DATABASE.md` · `docs/BE-PROJECT-RULES.md` · `IDEA.md` §14.
+> References: `docs/DATABASE.md` · `docs/BE-PROJECT-RULES.md`.
 
 ## 1. System Overview
 
@@ -44,7 +44,7 @@ flowchart TB
     API --> SH
 ```
 
-**Feature-based rationale:** each domain (transaction, budget, category…) is one self-contained package — its controller, service, repository, DTOs, entity live together. This keeps new-team onboarding and AI-assisted changes local to one feature, and prevents layer-chaos as scope grows (MVP → v0.2 → v0.3 in `IDEA.md`). Shared, cross-cutting concerns live in `shared/`.
+**Feature-based rationale:** each domain (transaction, budget, category…) is one self-contained package — its controller, service, repository, DTOs, entity live together. This keeps new-team onboarding and AI-assisted changes local to one feature, and prevents layer-chaos as scope grows (MVP → v0.2 → v0.3 in `IDEA.md` §4). Shared, cross-cutting concerns live in `shared/`.
 
 ## 2. Folder Structure
 
@@ -154,4 +154,4 @@ Rule: an item goes into `shared/` **only when 2+ features use it** — otherwise
 
 ### Async / scheduled (future)
 - `@EnableAsync` + `@Async` for event listeners (notifications, analytics recompute).
-- `@Scheduled` reserved for v0.2 recurring-transaction generation — not in MVP (see `IDEA.md` §24.4).
+- `@Scheduled` reserved for v0.2 recurring-transaction generation — not in MVP (see `IDEA.md` §6.4).

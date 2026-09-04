@@ -1,7 +1,7 @@
 # API Specification — Expense App
 
 > REST API for the Expense App backend.
-> References: `docs/DATABASE.md` (fields/entities) · `docs/BE-ARCHITECTURE.md` · `docs/BE-PROJECT-RULES.md` (envelope + errors) · `IDEA.md` (product flows).
+> References: `docs/DATABASE.md` (fields/entities) · `docs/BE-ARCHITECTURE.md` · `docs/BE-PROJECT-RULES.md` (envelope + errors) · `IDEA.md` (product decisions).
 
 ## 1. Overview
 
@@ -138,7 +138,7 @@ Format: `[FEATURE]_[NUMBER]`. `details` = structured field errors on `400`.
 | GET | `/transactions/{id}` | Detail | Yes |
 | PATCH | `/transactions/{id}` | Update | Yes |
 | DELETE | `/transactions/{id}` | Delete | Yes |
-| POST | `/transactions/{id}/duplicate` | "Lặp lại giao dịch" — copy with new date (MVP recurring, per `IDEA.md` §24.4) | Yes |
+| POST | `/transactions/{id}/duplicate` | "Lặp lại giao dịch" — copy with new date (MVP recurring, per `IDEA.md` §6.4) | Yes |
 
 ### Feature: Budget
 | Method | Path | Description | Auth |

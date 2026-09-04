@@ -1,7 +1,7 @@
 # Web Admin Project Rules — Expense App
 
 > Feature-based rules for the Web Admin (React + TypeScript + Tailwind).
-> References: `docs/API_SPEC.md` · `IDEA.md` §17.
+> References: `docs/API_SPEC.md` · `IDEA.md` §2.
 
 ## Tech Stack
 - Framework: React 18 + TypeScript (strict)

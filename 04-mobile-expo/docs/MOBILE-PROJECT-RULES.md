@@ -1,7 +1,7 @@
 # Mobile App Project Rules — Expense App
 
 > Feature-based rules for the Mobile app (React Native + Expo + TypeScript) — **primary product**.
-> References: `docs/API_SPEC.md` · `IDEA.md` §15–16, §24.6 (offline).
+> References: `docs/API_SPEC.md` · `IDEA.md` §6.6 (offline).
 
 ## Tech Stack
 - Framework: React Native (Expo SDK) + TypeScript (strict)
@@ -74,7 +74,7 @@ DTO fields mirror `docs/API_SPEC.md` (camelCase). **Client generates UUID ids** 
 - **Offline-first write (core):** user action → service writes to **local queue (SQLite)** immediately → `syncEngine` pushes to API when online. Never block the UI on network.
 - API calls only in `*Service.ts`; components consume via TanStack Query hooks.
 - Server state → React Query cache; UI state → `useState` local first; global only when shared.
-- Sync strategy: **single-direction** (user creates → server), client UUID idempotency, retry with backoff. No 2-way conflict resolution in MVP (`IDEA.md` §24.6).
+- Sync strategy: **single-direction** (user creates → server), client UUID idempotency, retry with backoff. No 2-way conflict resolution in MVP (`IDEA.md` §6.6).
 - Error handling: ErrorBoundary + toasts; show "pending sync" badge for unsynced items.
 - Loading: skeletons/spinners; optimistic updates for transaction create.
 - Forms: controlled components (or react-hook-form); validation mirrors `docs/API_SPEC.md` error codes.
@@ -118,7 +118,7 @@ write → SQLite queue (uuid, payload, status, retries) → [online] → POST /a
 - Native modules in `ios/` / `android/` (expo prebuild) — business code stays platform-agnostic in `src/`.
 
 ### Push notifications (v0.2)
-- Expo Notifications + `/notifications/stream` (SSE) — budget warnings (`IDEA.md` §9).
+- Expo Notifications + `/notifications/stream` (SSE) — budget warnings (`IDEA.md` §4.2).
 
 ### AI input (v0.3)
 - `transaction` feature includes AI-parse flow: natural language → `POST /api/v1/transactions/parse` → confirm screen → create.

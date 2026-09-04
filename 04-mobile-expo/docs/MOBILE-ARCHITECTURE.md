@@ -1,7 +1,7 @@
 # Mobile App Architecture — Expense App
 
 > Feature-based architecture for the Mobile app (React Native + Expo) — **primary product**.
-> References: `docs/API_SPEC.md` · `docs/MOBILE-PROJECT-RULES.md` · `IDEA.md` §15–16, §24.6.
+> References: `docs/API_SPEC.md` · `docs/MOBILE-PROJECT-RULES.md` · `IDEA.md` §6.6.
 
 ## 1. Overview
 
@@ -26,7 +26,7 @@ flowchart LR
     AUTH --> API
 ```
 
-**Rationale:** mobile is the primary product (`IDEA.md` §1) — its #1 job is "ghi tiền nhanh" even with no network. So the architecture is **offline-tolerant**: every write goes through a local SQLite queue (`syncEngine`) instead of calling the API directly (`IDEA.md` §24.6). Feature-based + shared/ keeps mobile modules self-contained like the backend. React Native + Expo + TypeScript keeps the ecosystem aligned with web (`IDEA.md` §16).
+**Rationale:** mobile is the primary product (`IDEA.md` §1) — its #1 job is "ghi tiền nhanh" even with no network. So the architecture is **offline-tolerant**: every write goes through a local SQLite queue (`syncEngine`) instead of calling the API directly (`IDEA.md` §6.6). Feature-based + shared/ keeps mobile modules self-contained like the backend. React Native + Expo + TypeScript keeps the ecosystem aligned with web.
 
 ## 2. Folder Structure
 
@@ -104,7 +104,7 @@ sequenceDiagram
     end
 ```
 
-- **Single-direction** sync (user → server), no 2-way conflict in MVP (`IDEA.md` §24.6).
+- **Single-direction** sync (user → server), no 2-way conflict in MVP (`IDEA.md` §6.6).
 - Idempotency by client UUID → the server upserts by id; a retried `POST /transactions` with the same id returns the existing record (matches the assigned-id contract in `docs/API_SPEC.md`).
 
 ## 6. Cross-feature Communication
@@ -163,5 +163,5 @@ features/transaction/TransactionNewScreen.tsx
 - **Offline sync engine:** `syncEngine.ts` (shared) — flushes `pending_ops` on app start + connectivity change (`@react-native-community/netinfo`); exponential backoff; hooks expose `useSyncStatus` for the "pending sync" badge.
 - **Local DB:** `expo-sqlite`; schema mirrors server tables' pending fields (`docs/DATABASE.md`) — `transactions_local`, `pending_ops`, `meta` (last sync time).
 - **Platform folders:** `ios/` / `android/` (expo prebuild) — native modules only; all business code in `src/`.
-- **Push notifications (v0.2):** Expo Notifications + `/notifications/stream` (SSE) for budget warnings (`IDEA.md` §9).
-- **AI input (v0.3):** `transaction` feature AI-parse flow — natural language → parse → confirm → create (`IDEA.md` §13).
+- **Push notifications (v0.2):** Expo Notifications + `/notifications/stream` (SSE) for budget warnings (`IDEA.md` §4.2).
+- **AI input (v0.3):** `transaction` feature AI-parse flow — natural language → parse → confirm → create (`IDEA.md` §6.5).

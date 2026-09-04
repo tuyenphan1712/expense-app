@@ -38,7 +38,7 @@ com.tuyenphan.expenseapp/
 ```
 
 - Every feature owns its `controller`, `service`, `repository`, `dto`, `entity`.
-- Feature list maps the MVP in `IDEA.md` §20: auth → transaction → category → dashboard → budget → analytics (dashboard lives in `analytics`).
+- Feature list maps the MVP in `IDEA.md` §4.1: auth → transaction → category → dashboard → budget → analytics (dashboard lives in `analytics`).
 - Empty `XxxContext.md` per feature (2–5 lines: purpose, main flows, cross-feature touches).
 
 ## 2. Naming Conventions

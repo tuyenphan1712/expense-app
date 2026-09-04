@@ -1,7 +1,7 @@
 # Web Admin Architecture — Expense App
 
 > Feature-based architecture for the Web Admin console.
-> References: `docs/API_SPEC.md` · `docs/WEB-PROJECT-RULES.md` · `IDEA.md` §2, §17.
+> References: `docs/API_SPEC.md` · `docs/WEB-PROJECT-RULES.md` · `IDEA.md` §2.
 
 ## 1. Overview
 
@@ -24,7 +24,7 @@ flowchart LR
     AUTH --> SH
 ```
 
-**Rationale:** the admin console is a management SPA, not the primary product (`IDEA.md` §17). It is deliberately lighter than mobile: no offline, no local DB, no sync. Feature-based organization keeps each admin module (users, categories, reports…) self-contained; TanStack Query centralizes server state; Vite SPA (no SSR needed — admin-only, internal). All admin reads/writes use the `/admin/*` API group (`docs/API_SPEC.md` §6), which requires the ADMIN role.
+**Rationale:** the admin console is a management SPA, not the primary product (`IDEA.md` §2). It is deliberately lighter than mobile: no offline, no local DB, no sync. Feature-based organization keeps each admin module (users, categories, reports…) self-contained; TanStack Query centralizes server state; Vite SPA (no SSR needed — admin-only, internal). All admin reads/writes use the `/admin/*` API group (`docs/API_SPEC.md` §6), which requires the ADMIN role.
 
 ## 2. Folder Structure
 
